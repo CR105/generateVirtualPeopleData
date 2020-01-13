@@ -58,7 +58,7 @@ numApell = 441
 objexcelW.Visible = True
 objexcelR.Visible = True
 
-For Iterator = 1 To 501 Step 1
+For Iterator = 1 To 10 Step 1
 
 	apPat = trim(objDriverSheetR.cells(RandomNumber(2,numApell), 3))
 	apMat = trim(objDriverSheetR.cells(RandomNumber(2,numApell), 3))
@@ -84,9 +84,10 @@ objexcelW.ActiveWorkbook.close
 objexcelR.ActiveWorkbook.close
 
 Function RandomNumber(nLow, nHigh)
-	WScript.Sleep 003
-	Set objRandom = CreateObject("System.Random")
-	RandomNumber = objRandom.Next_2(nLow, nHigh)
+	' WScript.Sleep 003
+	' Set objRandom = CreateObject("System.Random")
+	' RandomNumber = objRandom.Next_2(nLow, nHigh)
+	RandomNumber = Int((nHigh-nLow+1)*Rnd+nLow)
 End Function
 
 '**********************************************************
