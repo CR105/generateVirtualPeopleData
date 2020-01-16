@@ -1,7 +1,8 @@
 Option Explicit
 Dim objexcelR, objexcelW, objWorkbookR, objWorkbookW, objDriverSheetR, objDriverSheetW, objDicGen, objDicCity
 Dim lstAlfa
-Dim numNames, numApell
+Dim numNames(2)
+Dim numApell
 Dim Iterator
 Dim apPat, apMat, fechaNac, intGenero, intCiudad, genero, nombre, ciudad, CURP, RFC
 
@@ -52,8 +53,10 @@ objDicCity.Add "32", "ZS"
 
 lstAlfa = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
-numNames = 100
-numApell = 441
+' numNames = 100
+numNames(1) = objDriverSheetR.Cells(objDriverSheetR.Rows.Count, 2).End(-4162).Row
+numNames(2) = objDriverSheetR.Cells(objDriverSheetR.Rows.Count, 1).End(-4162).Row
+numApell = objDriverSheetR.Cells(objDriverSheetR.Rows.Count, 3).End(-4162).Row
 
 objexcelW.Visible = True
 objexcelR.Visible = True
@@ -66,7 +69,7 @@ For Iterator = 1 To 10 Step 1
 	intGenero = RandomNumber(1,2)
 	intCiudad = RandomNumber(1,32)
 	genero = objDicGen.Item(Cstr(intGenero))
-	nombre = trim(objDriverSheetR.cells(RandomNumber(2,numNames) , intGenero))
+	nombre = trim(objDriverSheetR.cells(RandomNumber(2,numNames(intGenero)) , intGenero))
 	ciudad = objDicCity.Item(Cstr(intCiudad))
 	CURP = getCURP(nombre, apPat, apMat, fechaNac, genero, ciudad)
 	RFC = getRFC(nombre, apPat, apMat, fechaNac)
